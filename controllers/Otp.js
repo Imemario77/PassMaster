@@ -48,18 +48,15 @@ export const VerifyOTP = async (req, res) => {
                      const verifiedUser = await User.findById(id);
                      console.log(verifiedUser);
                      if (verifiedUser) {
-                        const secretKey =
-                           "772e2a2144401ecff752d3218313fe076cc2d1211334f0e6526f3d24c04fd74d82f679ed9e6ae30f8303d3ef8d0f0eb1f23c175092158403f4eb5ab254c130eb";
                         const token = jwt.sign(
                            verifiedUser.toObject(),
-                           secretKey , { expiresIn: '1h' }
+                           process.env.secretKey,
+                           { expiresIn: "1h" }
                         );
                         console.log("token: " + token);
                         // Set the token as a cookie
                         res.cookie("token", token, { httpOnly: true });
-                        res.redirect(
-                           `/manager/home/`
-                        );
+                        res.redirect(`/manager/home/`);
                      }
                   }
                }
