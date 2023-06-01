@@ -1,0 +1,18 @@
+<%- include("header") -%>
+  <div class="login-page">
+    <div class="form">
+  	<h2>SignUp</h2>
+      <form action='/auth/register' method="post" class="login-form">
+     	 <% if (status ==='FAILED' ) {%>
+     	 <p class="err_msg"><%= message%></p>
+     	 <% } %>
+        <input name="username" type="text" placeholder="username"/>
+        <input name="email" type="email" placeholder="email"/>
+        <input name="password" type="password" placeholder="password"/>
+        <input name="confirmPassword" type="password" placeholder="comfirm password"/>
+        <button>SignUp</button>
+        <p class="message">Already registered? <a href="/auth/login">Login</a></p>
+      </form>
+    </div>
+  </div>
+ <%- include("footer") -%>

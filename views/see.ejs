@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OTP Validation Form</title>
+  <style>
+    .otp-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .otp-input input {
+      width: 40px;
+      height: 40px;
+      margin: 0 5px;
+      text-align: center;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h2>OTP Validation Form</h2>
+  <p>Enter the OTP sent to your mobile number:</p>
+  <div class="otp-input">
+    <input type="text" maxlength="1" autofocus>
+    <input type="text" maxlength="1">
+    <input type="text" maxlength="1">
+    <input type="text" maxlength="1">
+  </div>
+  <button id="submitBtn" disabled>Submit</button>
+
+  <script>
+    const inputs = document.querySelectorAll('.otp-input input');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Move focus to the next input on input entry
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (event) => {
+        if (event.target.value.length === event.target.maxLength) {
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          } else {
+            inputs[index].blur(); // Remove focus from the last input
+            submitBtn.disabled = false; // Enable submit button
+          }
+        }
+      });
+
+      // Move focus to the previous input on backspace/delete press
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Backspace' || event.key === 'Delete') {
+          if (index > 0 && event.target.value === '') {
+            inputs[index - 1].focus();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

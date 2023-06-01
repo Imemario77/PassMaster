@@ -1,0 +1,49 @@
+<%- include("header") -%>
+
+  <div class="otp-container">
+    <h2>Enter OTP</h2>
+    <form id="submit-form" action="/auth/otp" method="post">
+    <% if (status ==='PENDING' ) {%>
+     	 <p class="err_msg"><%= message%></p>
+     	<% } %>
+     <input name="first" class="otpInput"type="text" maxlength="1" autofocus  autocomplete="off"/>
+     <input name="second" class="otpInput" type="text" maxlength="1" autocomplete="off"/>
+     <input name="third" class="otpInput" type="text" maxlength="1" autocomplete="off" />
+     <input name="fourth" class="otpInput"  type="text" maxlength="1" autocomplete="off"/>
+     <input style="display:none;" name="id" type="text" value="<%=User%>"/>
+    </form>
+    <form method="post" action="/auth/resendOtp">
+    <button type="submit" name="id" value="<%=User%>" class="resend-btn">Resend OTP</button>
+    </form>
+  </div>
+  <script>
+  	const inputs = document.querySelectorAll(".otpInput")
+  	const submitForm = document.getElementById('submit-form')
+  	// Move focus to the next input on input entry
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (event) => {
+      	if (inputs[0].value !== ''&& inputs[1].value !==''&& inputs[2].value !==''&& inputs[3].value !=='') {
+      		
+      		submitForm.submit()
+  	}
+        if (event.target.value.length === event.target.maxLength) {
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          } else {
+            inputs[index].blur(); // Remove focus from the last input
+          }
+        }
+      });
+  
+      // Move focus to the previous input on backspace/delete press
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Backspace' || event.key === 'Delete') {
+          if (index > 0 && event.target.value === '') {
+            inputs[index - 1].focus();
+          }
+        }
+      });
+    });
+  
+  </script>
+<%- include("footer") -%>

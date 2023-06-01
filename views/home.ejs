@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PassMaster</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css" integrity="INTEGRITY_CODE" crossorigin="anonymous" />
+</head>
+<body>
+	<div class="DashBoard">
+		<div class="DashBoard_intro">
+			<h2>Welcome <%= user.username%></h2>
+			<input type="text" placeholder="Search"/>
+		</div>
+		<div class="action-selector-holder">
+			<div class="action-selector">
+			 <i class="fa-sharp fa-solid fa-lock-keyhole"></i>
+			 <span class="action-selector-span">Add a new password</span>
+			</div>
+			<div class="action-selector">
+				<i class="fa-sharp fa-solid fa-file-lock"></i>
+				<span class="action-selector-span">Keep private documents save</span>
+			</div>
+			<div class="action-selector">
+				<i class="fa-solid fa-download"></i>
+				<span class="action-selector-span">Password Generator</span>
+			</div>
+		</div>
+			<div class="Recently_Added">
+				<span>Recently added <i>...<i></i></span>
+				<button><i class="fa-regular fa-plus"></i>    New</button>
+			</div>
+		<a href='/auth/logut'>logout</a>
+	</div>
+</body>
+</html>
