@@ -126,7 +126,9 @@ h2 {
    display: flex;
    flex-direction: column;
    background-color: white;
+   max-height: auto;
    height: 100vh;
+   position: relative;
 }
 .DashBoard_intro {
    margin-top: 30px;
@@ -136,12 +138,21 @@ h2 {
    width: auto;
    height: auto;
 }
+.DashBoard_intro_icon_heading_holder {
+   display: flex;
+   gap: 1.2rem;
+}
+
+.DashBoard_intro_icon_heading_holder span i {
+   margin: 40px 10px 0 45px;
+   font-size: 70px;
+}
+
 .DashBoard_intro h2 {
    font-size: 40px;
    font-family: Comic Sans MS;
-   padding: 30px;
+   padding-bottom: 30px;
    padding-top: 50px;
-   margin-left: 15px;
 }
 
 .DashBoard_intro input {
@@ -201,6 +212,7 @@ h2 {
    justify-content: space-between;
    margin-top: 60px;
    padding: 30px;
+   margin-bottom: 80px;
 }
 .Recently_Added span {
    font-size: 30px;
@@ -232,4 +244,139 @@ h2 {
    color: gold;
    font-size: 25;
    font-weight: 500;
+}
+
+.main_passwd_holder {
+   display: flex;
+   gap: 1.5rem;
+   justify-content: space-around;
+   margin: 60px 0;
+}
+.edit_Span {
+   color: gold;
+   font-size: 50px;
+}
+.Password_holder {
+   display: flex;
+   flex-direction: column;
+}
+
+.Password_holder h2 {
+   font-size: 40px;
+   color: teal;
+   font-weight: 400;
+}
+.Password_holder span {
+   color: teal;
+   font-size: 20px;
+   font-weight: 250;
+}
+.Password_holder span i {
+   font-size: 5px;
+}
+.Pass_progress {
+   display: flex;
+   flex-direction: column;
+   padding-top: 20px;
+   gap: 1rem;
+}
+.Pass_progress span {
+   color: teal;
+   font-weight: 300;
+}
+
+progress {
+   width: 300px;
+   height: 15px;
+   background-color: teal;
+   border: 1px solid gold;
+   color: white;
+   border-radius: 4px;
+}
+progress::-webkit-progress-bar {
+   background-color: #eee;
+   border-radius: 4px;
+}
+
+/* Change the inner color of the progress bar */
+progress::-webkit-progress-value {
+   background-color: teal; /* Change this color */
+   border-radius: 4px;
+}
+
+progress::-moz-progress-bar {
+   background-color: teal;
+   border-radius: 4px;
+}
+
+.strengthStatus {
+   display: flex;
+   gap: 2rem;
+}
+
+/* password input form   */
+.Create_Entry_Form_Holder {
+   position: absolute;
+   top: 5%;
+   right: 19%;
+   background-color: white;
+   padding: 35px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   color: teal;
+   border-radius: 15px;
+   display: none;
+   border: 1px solid gold;
+}
+.Create_Entry_Form_Holder h1 {
+   color: teal;
+   text-align: center;
+   margin-top: 30px;
+}
+
+.CreateEntryForm {
+   font-family: Arial, sans-serif;
+   max-width: 400px;
+   margin: 30px auto;
+   background-color: #fff;
+   border-radius: 8px;
+   padding: 20px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+   display: block;
+   margin: 20px 0 10px;
+   color: #333;
+   font-weight: bold;
+}
+
+.CreateEntry {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+}
+
+input[type="submit"] {
+   background-color: #008080;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 4px;
+   cursor: pointer;
+   font-weight: bold;
+   margin: 20px auto;
+}
+
+input[type="submit"]:hover {
+   background-color: gold;
+}
+
+.closePanel {
+   position: absolute;
+   top: 20px;
+   right: 40px;
+   font-size: 60px;
+   color: black;
 }

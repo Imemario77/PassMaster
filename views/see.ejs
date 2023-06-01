@@ -1,60 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OTP Validation Form</title>
   <style>
-    .otp-input {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /* Style the progress bar */
+    
+
+    /* Customize the appearance of the progress bar */
+    progress::-webkit-progress-bar {
+      background-color: #eee;
+      border-radius: 4px;
     }
 
-    .otp-input input {
-      width: 40px;
-      height: 40px;
-      margin: 0 5px;
-      text-align: center;
-      font-size: 18px;
+    progress::-webkit-progress-value {
+      background-color: #4CAF50;
+      border-radius: 4px;
+    }
+
+    progress::-moz-progress-bar {
+      background-color: #4CAF50;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-  <h2>OTP Validation Form</h2>
-  <p>Enter the OTP sent to your mobile number:</p>
-  <div class="otp-input">
-    <input type="text" maxlength="1" autofocus>
-    <input type="text" maxlength="1">
-    <input type="text" maxlength="1">
-    <input type="text" maxlength="1">
-  </div>
-  <button id="submitBtn" disabled>Submit</button>
+  <!-- Define the progress bar -->
+  <progress value="50" max="100"></progress>
+
+  <!-- You can update the progress dynamically using JavaScript -->
+  <button onclick="updateProgress()">Update Progress</button>
 
   <script>
-    const inputs = document.querySelectorAll('.otp-input input');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // Move focus to the next input on input entry
-    inputs.forEach((input, index) => {
-      input.addEventListener('input', (event) => {
-        if (event.target.value.length === event.target.maxLength) {
-          if (index < inputs.length - 1) {
-            inputs[index + 1].focus();
-          } else {
-            inputs[index].blur(); // Remove focus from the last input
-            submitBtn.disabled = false; // Enable submit button
-          }
-        }
-      });
-
-      // Move focus to the previous input on backspace/delete press
-      input.addEventListener('keydown', (event) => {
-        if (event.key === 'Backspace' || event.key === 'Delete') {
-          if (index > 0 && event.target.value === '') {
-            inputs[index - 1].focus();
-          }
-        }
-      });
-    });
+    function updateProgress() {
+      var progressBar = document.querySelector('progress');
+      var newValue = Math.random() * 100; // Generate a random value between 0 and 100
+      progressBar.value = newValue;
+    }
   </script>
 </body>
 </html>

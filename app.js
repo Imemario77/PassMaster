@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import AuthRoute from "./route/auth.js";
 import homeRoute from "./route/home.js";
+import passRoute from "./route/passwordRoute.js";
 import path from "path";
 // app constant
 const app = express();
@@ -33,6 +34,10 @@ app.use(
 //app routes
 app.use("/auth", AuthRoute);
 app.use("/manager", homeRoute);
+app.use("/passManager", passRoute);
+app.get("/home", (req, res) => {
+   res.render("see");
+});
 
 // Error handling middleware
 app.use((req, res, next) => {

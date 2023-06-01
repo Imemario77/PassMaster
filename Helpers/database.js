@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-   username: {   type: String,
-      reqiured: true,},
+   username: { type: String, reqiured: true },
    password: String,
    email: {
       type: String,
@@ -24,10 +23,14 @@ const otpSchema = new Schema({
 export const Otp = new mongoose.model("otp", otpSchema);
 
 const passwordMangerSchema = new Schema({
-   info: String,
+   title: String,
    id: String,
+   email: String,
    password: String,
-   name: String,
+   strength: String,
+   strengthStatus: String,
+   created: String,
+   updated: Array,
 });
 
 export const PasswordManger = new mongoose.model(

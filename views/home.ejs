@@ -8,10 +8,14 @@
 <body>
 	<div class="DashBoard">
 		<div class="DashBoard_intro">
-			<h2>Welcome <%= user.username%></h2>
+			<div class="DashBoard_intro_icon_heading_holder">
+			<span><i class="fa-regular fa-circle-user"></i></span>
+			<h2>
+			Welcome <%= user.username%>
+			</h2></div>
 			<input type="text" placeholder="Search"/>
 		</div>
-		<div class="action-selector-holder">
+		<div onclick="openPanel()" class="action-selector-holder">
 			<div class="action-selector">
 			 <i class="fa-sharp fa-solid fa-lock-keyhole"></i>
 			 <span class="action-selector-span">Add a new password</span>
@@ -27,9 +31,48 @@
 		</div>
 			<div class="Recently_Added">
 				<span>Recently added <i>...<i></i></span>
-				<button><i class="fa-regular fa-plus"></i>    New</button>
+				<button onclick="openPanel()"><i class="fa-regular fa-plus"></i>    New</button>
 			</div>
+			<% data.map(singleData =>{ %>
+
+			<div class="main_passwd_holder">
+				<div class="Password_holder">
+					<h2><%= singleData.title%></h2>
+						<span>singleData.email</span>
+				</div>
+					<div class="Pass_progress">
+						<div class="strengthStatus">
+			  				<span><%= singleData.strengthStatus %> </span><span>  <%= singleData.strength * 10 %>%</span>
+						</div>
+							<progress value="<%=singleData.strength * 10%>" max="100"></progress>
+					</div>
+				<span class="edit_Span">...</span>
+			</div>
+		<%	}) %>
+		<div></div>
+<div class="Create_Entry_Form_Holder">
+  <h1>Password Manager - Create Entry</h1>
+
+  <form class="CreateEntryForm" action="/passManager/save" method="POST">
+    <label for="website">title:</label>
+    <input class="CreateEntry" type="text" id="website" name="title" autocomplete="off" required>
+    <br>
+    <input style="display: none" type="text" value="<%= user._id %>" name="id" autocomplete="off" required>
+
+    <label for="username">Username or email: </label>
+    <input class="CreateEntry" type="text" id="username" name="username_email" autocomplete="off" required>
+    <br>
+
+    <label for="password">Password: </label>
+    <input class="CreateEntry" type="text" id="password" name="password" autocomplete="off" required>
+    <br>
+
+    <input type="submit" value="Save">
+  </form>
+  <span  onclick="closePanel()" class="closePanel">&times;</span>
+  </div>
 		<a href='/auth/logout'>logout</a>
 	</div>
+	<script type="text/javascript" src="/index.js"></script>
 </body>
 </html>
