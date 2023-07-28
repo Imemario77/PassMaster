@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 import AuthRoute from "./route/auth.js";
 import homeRoute from "./route/home.js";
 import passRoute from "./route/passwordRoute.js";
+import passGeneratorRoute from "./route/passGeneratorRoute.js";
+import searchRoute from "./route/searchRoute.js";
 import path from "path";
 // app constant
 const app = express();
@@ -35,6 +37,8 @@ app.use(
 app.use("/auth", AuthRoute);
 app.use("/manager", homeRoute);
 app.use("/passManager", passRoute);
+app.use("/generate", passGeneratorRoute);
+app.use("/search", searchRoute);
 app.get("/home", (req, res) => {
    res.render("see");
 });

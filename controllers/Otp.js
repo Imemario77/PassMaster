@@ -51,7 +51,7 @@ export const VerifyOTP = async (req, res) => {
                         const token = jwt.sign(
                            verifiedUser.toObject(),
                            process.env.secretKey,
-                           { expiresIn: "1h" }
+                           { expiresIn: "5h" }
                         );
                         console.log("token: " + token);
                         // Set the token as a cookie

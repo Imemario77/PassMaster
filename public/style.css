@@ -315,12 +315,15 @@ progress::-moz-progress-bar {
 }
 
 /* password input form   */
-.Create_Entry_Form_Holder {
+.Create_Entry_Form_Holder,
+.openGeneratePass,
+.copyGenPass {
    position: absolute;
-   top: 5%;
-   right: 19%;
+   top: 23%;
+   left: 50%;
+   transform: translate(-50%, -50%);
    background-color: white;
-   padding: 35px;
+   padding: 35px 50px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
    color: teal;
    border-radius: 15px;
@@ -379,4 +382,80 @@ input[type="submit"]:hover {
    right: 40px;
    font-size: 60px;
    color: black;
+}
+
+.display_password_data {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+   height: 100vh;
+   width: auto;
+   padding: 30px 70px;
+   background-color: white;
+   padding-top: 100px;
+}
+.display_password_data form {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.display_password_data h4 {
+   font-size: 40px;
+   color: teal;
+   font-family: Monospace;
+   margin: 20px 50px 10px 0;
+}
+
+.display_password_data input,
+.copyGenPassSpan {
+   height: auto;
+   width: auto;
+   padding: 20px;
+   background-color: #eae6e6;
+   margin: 10px 20px 10px 0;
+   font-size: 20px;
+   border-radius: 15px;
+   border: 0.5px solid #eae6e6;
+}
+
+.display_password_data div {
+   display: flex;
+   justify-content: space-around;
+   font-size: 30px;
+}
+.display_password_data div button {
+   width: 100px;
+   height: 50px;
+   border: 1px solid teal;
+   border-radius: 15px;
+   color: white;
+   margin: 20px 0;
+   background-color: teal;
+}
+
+.display_password_data div a {
+   margin-top: 30px;
+   color: black;
+   text-decoration: none;
+}
+
+.openGeneratePass,
+.copyGenPass {
+   flex-direction: column;
+   gap: 1rem;
+   padding: 50px 100px;
+   text-align: center;
+   border: 0.1px solid black;
+}
+
+.openGeneratePass button {
+   height: 100%;
+   padding: 20px;
+   width: 100%;
+   font-size: 30px;
+   background-color: teal;
+   color: white;
+   border-radius: 15px;
+   border: 0.1px solid teal;
 }

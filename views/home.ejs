@@ -7,24 +7,25 @@
 </head>
 <body>
 	<div class="DashBoard">
+
 		<div class="DashBoard_intro">
 			<div class="DashBoard_intro_icon_heading_holder">
 			<span><i class="fa-regular fa-circle-user"></i></span>
 			<h2>
 			Welcome <%= user.username%>
 			</h2></div>
-			<input type="text" placeholder="Search"/>
+			<input class="searchRoute" onchange="searchRoute()" type="text" name="<%= user._id %>" placeholder="Search"/>
 		</div>
-		<div onclick="openPanel()" class="action-selector-holder">
-			<div class="action-selector">
+		<div  class="action-selector-holder">
+			<div onclick="openPanel()" class="action-selector">
 			 <i class="fa-sharp fa-solid fa-lock-keyhole"></i>
 			 <span class="action-selector-span">Add a new password</span>
 			</div>
-			<div class="action-selector">
+			<div onclick="alert('coming soon')" class="action-selector">
 				<i class="fa-sharp fa-solid fa-file-lock"></i>
 				<span class="action-selector-span">Keep private documents save</span>
 			</div>
-			<div class="action-selector">
+			<div onclick="openGeneratePass()"class="action-selector">
 				<i class="fa-solid fa-download"></i>
 				<span class="action-selector-span">Password Generator</span>
 			</div>
@@ -34,11 +35,13 @@
 				<button onclick="openPanel()"><i class="fa-regular fa-plus"></i>    New</button>
 			</div>
 			<% data.map(singleData =>{ %>
-
+			<form  class="submit-form-data" style="display:none" method="post" action="/passManager/get">
+				<input type="text" value="<%= singleData._id.toString() %>" name="id">
+			</form>
 			<div class="main_passwd_holder">
 				<div class="Password_holder">
-					<h2><%= singleData.title%></h2>
-						<span>singleData.email</span>
+					<h2><%= singleData.title.slice(0,8)%></h2>
+						<span><%=singleData.email.slice(0,20) %></span>
 				</div>
 					<div class="Pass_progress">
 						<div class="strengthStatus">
@@ -51,7 +54,7 @@
 		<%	}) %>
 		<div></div>
 <div class="Create_Entry_Form_Holder">
-  <h1>Password Manager - Create Entry</h1>
+  <h1>Add a new password</h1>
 
   <form class="CreateEntryForm" action="/passManager/save" method="POST">
     <label for="website">title:</label>
@@ -64,15 +67,45 @@
     <br>
 
     <label for="password">Password: </label>
-    <input class="CreateEntry" type="text" id="password" name="password" autocomplete="off" required>
+    <input class="CreateEntry" type="text" id="password" name="password" autocomplete="off"  required>
     <br>
 
     <input type="submit" value="Save">
+    
   </form>
   <span  onclick="closePanel()" class="closePanel">&times;</span>
+   </div>
+  <div class="openGeneratePass"> 
+  <span>Password Generator</span>
+  <span>
+  <label>Password length</label>
+  	<input class="generatePass" name="passLength" type="number"  required>
+ </span>
+ <span>
+  <label>add Special Charater</label>
+  	<input class="generatePass" name="hasSpecialChars" type="checkbox">
+ </span>
+ <span>
+  <label>add Uppercase Charater</label>
+  	<input class="generatePass" name="hasUppercaseChars" type="checkbox">
+ </span>
+ <span>
+  <label>add Lowercase Charater</label>
+  	<input class="generatePass" name="hasLowercaseChars" type="checkbox">
+ </span>
+ <span>
+  <label>add Numbers</label>
+  	<input class="generatePass" name="hasNumberChars" type="checkbox">
+ </span>
+  	<button onclick="generatePass()">Done</button> 	 
+  	<span  onclick="closePanel()" class="closePanel">&times;</span>
+  </div>
+  <div class="copyGenPass">
+  	<span class="copyGenPassSpan">   yuh</span>
+  	<span  onclick="closePanel()" class="closePanel">&times;</span>
   </div>
 		<a href='/auth/logout'>logout</a>
 	</div>
-	<script type="text/javascript" src="/index.js"></script>
+	<script type="text/javascript" src="/index.js" defer></script>
 </body>
 </html>

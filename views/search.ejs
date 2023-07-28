@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PassMaster</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css" integrity="INTEGRITY_CODE" crossorigin="anonymous" />
+</head>
+<body>
+	<div class="DashBoard">
+		<div class="DashBoard_intro">
+			<div class="DashBoard_intro_icon_heading_holder">
+				<span><i class="fa-regular fa-circle-user"></i></span>
+				<h2>
+				Search
+				</h2>
+			</div>
+			<input class="searchRoute" onchange="searchRoute()" type="text" name="<%= user._id %>" placeholder="Search"/>
+		</div>
+		<%=foundSearch%>
+	</div>
+		

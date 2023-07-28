@@ -1,5 +1,15 @@
-import CryptoJS from "crypto-js";
 import { PasswordManger } from "../Helpers/database.js";
+import {
+   hasSimilarCharacter,
+   decryptionProcess,
+   encryptionProcess,
+} from "../Helpers/appFunctions.js";
+import {
+   uppercaseChars,
+   lowercaseChars,
+   numberChars,
+   symbolChars,
+} from "../Helpers/varables.js";
 
 export const passwordData = async (req, res, next) => {
    try {
@@ -12,33 +22,7 @@ export const passwordData = async (req, res, next) => {
    next();
 };
 
-function hasSimilarCharacter(str1, str2) {
-   for (let char of str2) {
-      if (str1.includes(char)) {
-         return true;
-      }
-   }
-   return false;
-}
-
-function encryptionProcess(password) {
-   // Example usage
-   const encrypted = CryptoJS.AES.encrypt(password, "secret key");
-   console.log("password: " + encrypted.toString());
-   return encrypted.toString();
-}
-function decryptionProcess(password) {
-   // Example usage
-   const encrypted = CryptoJS.AES.decrypt(password, "secret key");
-   console.log("decrypt password: " + encrypted.toString(CryptoJS.enc.Utf8));
-}
-
 export const createNewPasswordData = async (req, res) => {
-   var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-   var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-   var numberChars = "0123456789";
-   var symbolChars = "!@#$%^&*()-_=+";
-
    let strength = 0;
    let strengthStatus = "";
    const password = req.body.password;
@@ -124,14 +108,56 @@ export const createNewPasswordData = async (req, res) => {
       const passwordDataSchema = new PasswordManger({
          title: req.body.title,
          id: req.body.id,
-         email: req.body.email,
+         email: req.body.username_email,
          password: encryptedPassword,
          strength: strength,
          strengthStatus: strengthStatus,
          created: new Date(),
       });
       const result = await passwordDataSchema.save();
-      console.log(result);
+      res.redirect("/manager/home");
+   } catch (e) {
+      console.log(e);
+   }
+};
+
+export const fetchUserPasswordData = async (req, res) => {
+   let data = await PasswordManger.find({ _id: req.body.id });
+   const decryptedPassword = decryptionProcess(data[0].password);
+   data = data[0].toObject();
+   data.password = decryptedPassword;
+   res.render("viewPassword", { data: data });
+};
+
+export const updateUserPassword = async (req, res) => {
+   try {
+      let update;
+      if (req.body.email && req.body.password) {
+         const encryptPassword = encryptionProcess(req.body.password);
+         update = {
+            $set: { email: req.body.email, password: encryptPassword },
+         };
+      } else if (req.body.password) {
+         update = { $set: { password: encryptPassword } };
+      } else if (req.body.email) {
+         update = { $set: { email: req.body.email } };
+      }
+      await PasswordManger.updateOne({ _id: req.body.id }, update);
+      let data = await PasswordManger.find({ _id: req.body.id });
+      const decryptedPassword = decryptionProcess(data[0].password);
+      data = data[0].toObject();
+      data.password = decryptedPassword;
+      res.render("viewPassword", { data: data });
+   } catch (e) {
+      console.log(e);
+   }
+};
+
+export const deleteUserPassword = async (req, res) => {
+   console.log(req.body);
+   try {
+      const deleted = await PasswordManger.deleteOne({ _id: req.body.id });
+      res.redirect("/manager/home");
    } catch (e) {
       console.log(e);
    }

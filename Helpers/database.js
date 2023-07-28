@@ -37,3 +37,11 @@ export const PasswordManger = new mongoose.model(
    "PasswordManger",
    passwordMangerSchema
 );
+
+const fileMangerSchema = new Schema({
+   id: String,
+   name: String,
+   file: String,
+});
+
+export const FileManger = new mongoose.model("FileManger", fileMangerSchema);
